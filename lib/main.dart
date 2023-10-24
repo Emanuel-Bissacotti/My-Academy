@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:myacademy/firebase_options.dart';
+import 'package:myacademy/help/router_screens.dart';
 import 'package:myacademy/screens/login_screen.dart';
 
 void main() async {
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My Academy',
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
         primaryColor: Colors.black,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: TextButton.styleFrom(
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const LoginScreen(),
+      home: RouterScreens(),
     );
   }
 }
