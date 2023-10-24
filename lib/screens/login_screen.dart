@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myacademy/components/text_field_login.dart';
+import 'package:myacademy/components/show_snackBar.dart';
+import 'package:myacademy/components/build_text_field.dart';
+import 'package:myacademy/screens/create_user.dart';
+import 'package:myacademy/screens/home_screen.dart';
 import 'package:myacademy/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,8 +17,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passowrdController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passowrdController = TextEditingController();
 
     return SafeArea(
       child: Scaffold(
@@ -34,34 +37,46 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    buildTextFormField(
-                      controller: _emailController,
+                    BuildFormField(
+                      controller: emailController,
                       labelText: 'E-mail:',
-                      keyboard: TextInputType.emailAddress,
                     ),
-                    buildTextFormField(
-                        controller: _passowrdController,
-                        labelText: 'Senha:',
-                        password: true,
-                        keyboard: TextInputType.visiblePassword),
+                    BuildFormField(
+                      controller: passowrdController,
+                      labelText: 'Senha:',
+                      showVisibilityIcon: true,
+                      obscureText: true,
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CreateUser(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          "Não possui cadastro? clique aqui e cadastre-se",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                        )),
                     ElevatedButton(
                       onPressed: () => _validateLogin(
-                        _emailController.text,
-                        _passowrdController.text,
-                      ),
-                      onLongPress: () => _createUser(
-                        _emailController.text,
-                        _passowrdController.text,
+                        emailController.text,
+                        passowrdController.text,
                       ),
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.white70), // Define a cor de fundo
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white70),
                       ),
                       child: const Text(
                         "Entrar",
                         style: TextStyle(
-                          color: Colors.black, // Define a cor do texto
-                          fontSize: 19, // Define o tamanho da fonte (opcional)
+                          color: Colors.black,
+                          fontSize: 19,
                         ),
                       ),
                     )
@@ -77,14 +92,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _validateLogin(String email, String senha) {
     if (_loginForm.currentState!.validate()) {
-      AuthService().entrarUsuario(email: email, senha: senha);
-      Navigator.pop(context);
+      AuthService().entrarUsuario(email: email, senha: senha).then((error) {
+        if (error != null) {
+          ShowSnackBar(context: context, text: error);
+        }
+      });
     } else {}
   }
 
-  _createUser(String email, String senha) {
-    if (_loginForm.currentState!.validate()) {
-      AuthService().cadastrarUsuario(email: email, senha: senha);
-    }
-  }
+  // _createUser(String email, String senha) {
+  //   if (_loginForm.currentState!.validate()) {
+  //     AuthService()
+  //         .cadastrarUsuario(email: email, password: senha)
+  //         .then((error) {
+  //       if (error != null) {
+  //         ShowSnackBar(context: context, text: error, color: Colors.red);
+  //       }
+  //     });
+  //   }
+  // }
 }
