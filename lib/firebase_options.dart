@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDdLzffJO83Qr2jt6_jOWKCbEN3Gbe6FBU',
-    appId: '1:1063239314385:android:c0de4ab4e6a011cc200ef0',
-    messagingSenderId: '1063239314385',
-    projectId: 'my-academy-66955',
-    storageBucket: 'my-academy-66955.appspot.com',
+    apiKey: 'AIzaSyCoSTDpPyDO7SG5omejDRWv5bouwBXntik',
+    appId: '1:809327328878:android:a51a6647855bde46adf07f',
+    messagingSenderId: '809327328878',
+    projectId: 'my-academy-9f66e',
+    storageBucket: 'my-academy-9f66e.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC5SX8AMjSfPzHwG4NpilanzxfMg8tp8eE',
-    appId: '1:1063239314385:ios:f8ae321234469790200ef0',
-    messagingSenderId: '1063239314385',
-    projectId: 'my-academy-66955',
-    storageBucket: 'my-academy-66955.appspot.com',
+    apiKey: 'AIzaSyA18Jb1Xkn2x0GfMCcp8S2UqoieqyKQajY',
+    appId: '1:809327328878:ios:a14e5006265de910adf07f',
+    messagingSenderId: '809327328878',
+    projectId: 'my-academy-9f66e',
+    storageBucket: 'my-academy-9f66e.appspot.com',
     iosBundleId: 'com.example.myacademy',
   );
 }
